@@ -49,7 +49,7 @@ using namespace qucs;
 
 %}
 
-%name-prefix "touchstone_"
+%define api.prefix {touchstone_}
 
 %token InvalidCharacter
 %token Float
@@ -101,15 +101,6 @@ Dataset: /* nothing */ { }
     if (touchstone_line)
       touchstone_line->setNext($2);
     touchstone_line = $2;
-  }
-  | Dataset DataLine { /* last line, no trailing end-of-line */
-    if (!touchstone_vector)
-      touchstone_vector = $2; /* save first vector location */
-    if (touchstone_line)
-      touchstone_line->setNext($2);
-    touchstone_line = $2;
-    logprint (LOG_ERROR, "line %d: no trailing end-of-line found, "
-	      "continuing...\n", touchstone_lineno);
   }
   | Dataset Eol { /* skip this line */ }
 ;
