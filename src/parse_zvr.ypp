@@ -49,7 +49,7 @@ using namespace qucs;
 
 %}
 
-%name-prefix "zvr_"
+%define api.prefix {zvr_}
 
 %token ZVR
 %token Version
